@@ -4,7 +4,7 @@ metadata:
   name: frontend-ingress
 spec:
   rules:
-  - host: "www.iTi_project.com"
+  - host: "www.iti_project.com"
     http:
       paths:
       - pathType: Prefix
