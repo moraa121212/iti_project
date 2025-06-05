@@ -5,8 +5,10 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1" 
 spec:
+  storageClassName: manual 
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
+  volumeName: postgres-pv 
