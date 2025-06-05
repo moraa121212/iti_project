@@ -8,4 +8,4 @@ WORKDIR /app
 COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
 COPY app.py .
 EXPOSE 5000
-CMD ["gunicorn", "app:app", "-b", "0.0.0.0:5000", "-w", "4"]
+CMD ["/usr/local/bin/gunicorn", "app:app", "-b", "0.0.0.0:5000", "-w", "4"]
