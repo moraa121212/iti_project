@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgresql-service
+  annotations:
+    argocd.argoproj.io/sync-wave: "0" 
 spec:
   selector:
     app: postgresql
@@ -9,3 +11,4 @@ spec:
     - protocol: TCP
       port: 5432
       targetPort: 5432
+  type: ClusterIP 
