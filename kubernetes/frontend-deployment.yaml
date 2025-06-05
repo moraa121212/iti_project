@@ -4,8 +4,6 @@ metadata:
   name: frontend-deployment
   labels:
     app: frontend
-  annotations:
-    argocd.argoproj.io/sync-wave: "3"
 spec:
   replicas: 3
   selector:
