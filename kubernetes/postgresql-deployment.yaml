@@ -4,8 +4,6 @@ metadata:
   name: postgresql-deployment
   labels:
     app: postgresql
-  annotations:
-    argocd.argoproj.io/sync-wave: "1" 
 spec:
   replicas: 1
   selector:
