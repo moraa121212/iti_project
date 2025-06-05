@@ -45,8 +45,8 @@ pipeline {
                     sh '''
                         git config user.email "amr.hatem2h@gmail.com"
                         git config user.name "moraa121212"
-                        sed -i "s|image: backend-flask-app:.*|image: ${DOCKER_REGISTRY}/backend-flask-app:${IMAGE_TAG}|g" kubernetes/backend-deployment.yaml
-                        sed -i "s|image: frontend-app:.*|image: ${DOCKER_REGISTRY}/frontend-app:${IMAGE_TAG}|g" kubernetes/frontend-deployment.yaml
+                        sed -i "s|image: amrhatem/backend-flask-app:.*|image: ${DOCKER_REGISTRY}/backend-flask-app:${IMAGE_TAG}|g" kubernetes/backend-deployment.yaml
+                        sed -i "s|image: amrhatem/frontend-app:.*|image: ${DOCKER_REGISTRY}/frontend-app:${IMAGE_TAG}|g" kubernetes/frontend-deployment.yaml
                         git add kubernetes/backend-deployment.yaml kubernetes/frontend-deployment.yaml
                         git commit -m "Update K8s manifests with new image tags for build ${IMAGE_TAG}" || echo "No changes to commit"
                         git push https://${GIT_USER}:${GIT_PASS}@github.com/moraa121212/iti_project.git HEAD:main
