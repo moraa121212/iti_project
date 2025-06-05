@@ -4,8 +4,6 @@ metadata:
   name: postgres-pv
   labels:
     type: local
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1.5" 
 spec:
   storageClassName: manual
   capacity:
