@@ -6,6 +6,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 FROM python:3.9-alpine
 WORKDIR /app
 COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+ENV PATH="/usr/local/lib/python3.9/site-packages/bin:${PATH}"
 COPY app.py .
 EXPOSE 5000
-CMD ["/usr/local/bin/gunicorn", "app:app", "-b", "0.0.0.0:5000", "-w", "4"]
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:5000", "-w", "4"]
