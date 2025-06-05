@@ -2,8 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend-ingress
-  annotations:
-    argocd.argoproj.io/sync-wave: "4" 
 spec:
   rules:
   - host: "www.iTi_project.com"
