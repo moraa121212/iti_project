@@ -19,6 +19,20 @@ spec:
         image: backend-flask-app:latest
         ports:
         - containerPort: 5000
+        env:
+        - name: DB_HOST
+          value: postgresql-service
+        - name: DB_NAME
+          value: mydatabase
+        - name: DB_USER
+          value: user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgresql-secret
+              key: postgres-password
+        - name: DB_PORT
+          value: "5432"
         resources:
           requests:
             cpu: "100m"
