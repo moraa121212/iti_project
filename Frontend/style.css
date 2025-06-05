@@ -1,0 +1,57 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient to right, #6a11cb, #2575fc); /* خلفية متدرجة */
+    color: #fff;
+    text-align: center;
+    overflow: hidden; /* عشان لو في أي حاجة خرجت عن نطاق الصفحة */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.15); /* خلفية شفافة للعنصر الرئيسي */
+    padding: 40px 60px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* تأثير ضبابي للخلفية اللي وراه */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: #ffd700; /* لون ذهبي للعنوان */
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #6a11cb; /* لون بنفسجي غامق للنص */
+    background-color: #ffd700; /* لون ذهبي للزرار */
+    border: none;
+    border-radius: 50px; /* زرار دائري الحواف */
+    cursor: pointer;
+    transition: all 0.3s ease; /* تأثيرات انتقال سلسة */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #ffc400; /* لون أغمق عند الوقوف بالماوس */
+    transform: translateY(-3px); /* حركة بسيطة لأعلى */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(0); /* يرجع لمكانه عند الضغط */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
