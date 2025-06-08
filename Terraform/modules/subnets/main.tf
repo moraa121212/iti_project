@@ -11,7 +11,13 @@ resource "aws_subnet" "project_subnet_puplic" {
   availability_zone = each.key
   map_public_ip_on_launch = true
 }
-resource "aws_eip" "project_nat" {
+resource "aws_eip" "project_eip" {
   count = length(var.subnet_cidrs_pup) 
   vpc   = true
+}
+resource "aws_nat_gateway" "project" {
+  count         = length(var.subnet_cidrs_pup) 
+  allocation_id = aws_eip.project_eip[count.index].id 
+  subnet_id     = aws_subnet.project_subnet_puplic[count.index].id 
+  depends_on = [aws_internet_gateway.project]
 }
