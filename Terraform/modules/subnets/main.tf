@@ -19,5 +19,5 @@ resource "aws_nat_gateway" "project" {
   count         = length(var.subnet_cidrs_pup) 
   allocation_id = aws_eip.project_eip[count.index].id 
   subnet_id     = aws_subnet.project_subnet_puplic[count.index].id 
-  depends_on = [aws_internet_gateway.project]
+  depends_on = [aws_internet_gateway.igw]
 }
