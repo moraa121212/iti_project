@@ -15,7 +15,7 @@ resource "aws_eip" "project_eip" {
   count = length(var.subnet_cidrs_pup) 
   vpc   = true
 }
-resource "aws_nat_gateway" "project" {
+resource "aws_nat_gateway" "project_nat_gateway" {
   count         = length(var.subnet_cidrs_pup) 
   allocation_id = aws_eip.project_eip[count.index].id 
   subnet_id     = aws_subnet.project_subnet_puplic[count.index].id 
@@ -29,11 +29,11 @@ resource "aws_route" "private_nat_gateway_route" {
   count                  = length(var.subnet_cidrs_prv) 
   route_table_id         = aws_route_table.private_rt[count.index].id
   destination_cidr_block = "0.0.0.0/0" 
-  nat_gateway_id         = aws_nat_gateway.main[count.index].id 
+  nat_gateway_id         = aws_nat_gateway.project_nat_gateway[count.index].id 
   depends_on = [aws_nat_gateway.main]
 }
 resource "aws_route_table_association" "private_subnet_associations" {
-  count          = length(aws_subnet.private) 
-  subnet_id      = aws_subnet.private[count.index].id
+  count          = length(var.subnet_cidrs_prv) 
+  subnet_id      = aws_subnet.project_subnet_private[count.index].id
   route_table_id = aws_route_table.private_rt[count.index].id 
 }
