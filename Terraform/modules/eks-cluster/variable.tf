@@ -7,13 +7,6 @@ variable "cluster_role_arn" {
   description = "IAM Role ARN to be used by the cluster"
   type        = string
 }
-
-variable "k8s_version" {
-  description = "Kubernetes version"
-  type        = string
-  default     = "1.31"
-}
-
 variable "subnet_ids" {
   description = "List of Subnet IDs to launch EKS cluster in"
   type        = list(string)
