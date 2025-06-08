@@ -9,4 +9,5 @@ resource "aws_subnet" "project_subnet-puplic" {
   vpc_id            = var.vpc_id
   cidr_block        = each.value
   availability_zone = each.key
+  map_public_ip_on_launch = true
 }
