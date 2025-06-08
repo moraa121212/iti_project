@@ -13,7 +13,7 @@ variable "node_role_arn" {
   type        = string
 }
 
-variable "subnet_ids" {
+variable "subnet_ids_prv" {
   description = "List of subnet IDs to launch the nodes in"
   type        = list(string)
 }
