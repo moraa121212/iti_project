@@ -11,3 +11,7 @@ resource "aws_subnet" "project_subnet_puplic" {
   availability_zone = each.key
   map_public_ip_on_launch = true
 }
+resource "aws_eip" "nat" {
+  count = length(var.public_subnet_cidrs) 
+  vpc   = true
+}
