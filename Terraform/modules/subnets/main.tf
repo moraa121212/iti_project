@@ -12,6 +12,6 @@ resource "aws_subnet" "project_subnet_puplic" {
   map_public_ip_on_launch = true
 }
 resource "aws_eip" "nat" {
-  count = length(var.public_subnet_cidrs) 
+  count = length(var.subnet_cidrs_pup) 
   vpc   = true
 }
