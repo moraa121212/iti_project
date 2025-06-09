@@ -3,7 +3,6 @@ module "vpc" {
   vpc_cidr = "10.0.0.0/16"
   vpc_name  = "iti-vpc"
 }
-
 module "subnets" {
   source = "./modules/subnets"
   vpc_id = module.vpc.vpc_id
@@ -16,36 +15,38 @@ module "internet_gateway" {
   vpc_id = module.vpc.vpc_id
   public_subnet_ids = module.subnets.subnet_ids_pup
 }
-
-module "SG" {
-  source = "./modules/SG"
+module "SG-nodes" {
+  source = "./modules/SG-nodes"
+  sg_nodes = "SG1"
   vpc_id = module.vpc.vpc_id
-  control_plane_cidr_blocks = ["10.0.0.0/16"]
 }
-
+module "SG-control-plane" {
+  source = "./modules/SG-control-plane"
+  sg_conrol_plane = "SG2"
+  vpc_id = module.vpc.vpc_id
+}
+module "SG-rule" {
+  source = "./modules/SG-rule"
+}
 module "IAM-Role" {
   source = "./modules/IAM-Role"
   role_name = "eks-role"
 }
-
 module "node-role" {
   source = "./modules/node-role"
   role_name = "project-nodes-role"
 }
-
 module "eks-cluster" {
   source = "./modules/eks-cluster"
   cluster_name = "project"
   cluster_role_arn = module.IAM-Role.role_arn
+  security_group_ids = [module.sg_control_plane.cluster_sg_ids]
   subnet_ids = concat(
     module.subnets.subnet_ids_prv, 
     module.subnets.subnet_ids_pup
   )
-  cluster_role_policy_attachment_depends_on = [
-    module.IAM-Role
-  ]
+  cluster_role_policy_attachment_depends_on = [module.IAM-Role]
 }
-
 module "nodes-group" {
   source = "./modules/nodes-group"
   cluster_name = module.eks-cluster.cluster_name
@@ -58,7 +59,6 @@ module "nodes-group" {
   max_unavailable = 1
   instance_types  = ["t3.medium"]
   ami_type        = "AL2_x86_64"
-  depends_on_resources = [
-    module.node-role.role_arn
-  ]   
+  security_group_ids = [module.sg_worker.sg_nodes_ids]
+  depends_on_resources = [module.node-role.role_arn]   
 }
