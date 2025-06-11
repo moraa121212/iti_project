@@ -3,11 +3,39 @@ pipeline {
     environment {
         DOCKER_REGISTRY = 'amrhatem'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
+        SONAR_PROJECT_KEY = 'my_multi_tier_app'
+        SONAR_PROJECT_NAME = 'My Multi-Tier App'
+        SONAR_SCANNER_HOME = tool 'SonarScanner'
     }
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/moraa121212/iti_project.git'
+            }
+        }
+        stage('Run Backend Static Analysis (SonarQube)') {
+            steps {
+                dir('backend') {
+                    withSonarQubeEnv('Sonarqube_Server') {
+                        sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner " +
+                           "-Dsonar.projectKey=${SONAR_PROJECT_KEY}_Backend " +
+                           "-Dsonar.projectName='${SONAR_PROJECT_NAME} Backend' " +
+                           "-Dsonar.sources=." +
+                           "-Dsonar.python.version=3"
+                    }
+                }
+            }
+        }
+        stage('Run Frontend Static Analysis (SonarQube)') {
+            steps {
+                dir('frontend') {
+                    withSonarQubeEnv('Sonarqube_Server') {
+                        sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner " +
+                           "-Dsonar.projectKey=${SONAR_PROJECT_KEY}_Frontend " +
+                           "-Dsonar.projectName='${SONAR_PROJECT_NAME} Frontend' " +
+                           "-Dsonar.sources=."
+                    }
+                }
             }
         }
         stage('Build Backend Docker Image') {
