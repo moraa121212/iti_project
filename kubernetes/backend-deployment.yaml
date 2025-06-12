@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-app
-        image: amrhatem/backend-flask-app:14
+        image: amrhatem/backend-flask-app:17
         ports:
         - containerPort: 5000
         env:
