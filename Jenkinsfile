@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Run Backend Static Analysis (SonarQube)') {
             steps {
-                dir('backend') {
+                dir('Backend') {
                     withSonarQubeEnv('project') {
                         sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner " +
                            "-Dsonar.projectKey=${SONAR_PROJECT_KEY}_Backend " +
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Run Frontend Static Analysis (SonarQube)') {
             steps {
-                dir('frontend') {
+                dir('Frontend') {
                     withSonarQubeEnv('project') {
                         sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner " +
                            "-Dsonar.projectKey=${SONAR_PROJECT_KEY}_Frontend " +
