@@ -20,7 +20,7 @@ pipeline {
                         sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner " +
                            "-Dsonar.projectKey=${SONAR_PROJECT_KEY}_Backend " +
                            "-Dsonar.projectName='${SONAR_PROJECT_NAME} Backend' " +
-                           "-Dsonar.sources=." +
+                           "-Dsonar.sources=. " +
                            "-Dsonar.python.version=3"
                     }
                 }
@@ -33,7 +33,7 @@ pipeline {
                         sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner " +
                            "-Dsonar.projectKey=${SONAR_PROJECT_KEY}_Frontend " +
                            "-Dsonar.projectName='${SONAR_PROJECT_NAME} Frontend' " +
-                           "-Dsonar.sources=."
+                           "-Dsonar.sources=. "
                     }
                 }
             }
