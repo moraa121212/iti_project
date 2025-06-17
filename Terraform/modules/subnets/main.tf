@@ -23,7 +23,7 @@ resource "aws_nat_gateway" "project_nat_gateway" {
 }
 resource "aws_route_table" "private_rt" {
   count  = length(var.subnet_cidrs_prv) 
-  vpc_id = aws_vpc.main.id
+  vpc_id = var.vpc_id
 }
 resource "aws_route" "private_nat_gateway_route" {
   count                  = length(var.subnet_cidrs_prv) 
