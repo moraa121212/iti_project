@@ -3,9 +3,7 @@ resource "aws_eks_node_group" "project-nodes" {
   node_group_name = var.node_group_name
   node_role_arn   = var.node_role_arn
   subnet_ids      = var.subnet_ids_prv
- security_group_ids = [
-    module.SG.worker_sg_id      
-  ]
+ security_group_ids = [ module.SG.worker_sg_id ]
   scaling_config {
     desired_size = var.desired_size
     max_size     = var.max_size
